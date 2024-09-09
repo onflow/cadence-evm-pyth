@@ -25,3 +25,7 @@ yarn-error.log*
 .env.production.local
 
 /.idea/*
+/solidity/cache/
+/solidity/node_modules/
+/solidity/out/
+/solidity/lib/forge-std/
