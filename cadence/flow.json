@@ -1,0 +1,32 @@
+{
+  "contracts": {
+    "EVM": {
+      "aliases": {
+        "emulator": "f8d6e0586b0a20c7",
+        "mainnet": "e467b9dd11fa00df",
+        "testnet": "8c5303eaa26202d6"
+      }
+    }
+  },
+  "networks": {
+    "emulator": "127.0.0.1:3569",
+    "mainnet": "access.mainnet.nodes.onflow.org:9000",
+    "testnet": "access.devnet.nodes.onflow.org:9000"
+  },
+  "accounts": {
+    "emulator-account": {
+      "address": "f8d6e0586b0a20c7",
+      "key": "fe809cc837ddcd7e761a482721c050aae43657448db859f4eb8fc421e9609938"
+    },
+    "testnet-jp": {
+      "address": "1844efeb3fef2542",
+      "key": {
+        "type": "hex",
+        "index": 1,
+        "signatureAlgorithm": "ECDSA_P256",
+        "hashAlgorithm": "SHA2_256",
+        "privateKey": "f3394ea869680b9dafdbb14663281659a36425e55aa7beab4e7b2785cc3f1caa"
+      }
+    }
+  }
+}
