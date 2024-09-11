@@ -5,7 +5,7 @@ import { Test, console2 } from "forge-std/Test.sol";
 import { ExamplePythOracleForwarder } from "../src/ExamplePythOracleForwarder.sol";
 import { MockPyth } from "@pythnetwork/pyth-sdk-solidity/MockPyth.sol";
 
-contract MyFirstPythContractTest is Test {
+contract TestExamplePythPracleForwarder is Test {
     MockPyth public pyth;
 
     ExamplePythOracleForwarder public app;
