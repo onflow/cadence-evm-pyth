@@ -18,7 +18,8 @@ transaction(myPythCallingContractAddressHex: String, pythHermesUpdateDataPayload
 
         let callResult = self.coa.call(
             to: self.evmAddress,
-            data: EVM.encodeABIWithSignature("fetchPrice(bytes[],bytes32,uint64)", [pythHermesUpdateDataPayload, tokenPriceFeedId, priceFeedPublishTime]),
+            data: EVM.encodeABIWithSignature("getGreeting()", []),
+//            data: EVM.encodeABIWithSignature("fetchPrice(string,string,uint64)", [pythHermesUpdateDataPayload, tokenPriceFeedId, priceFeedPublishTime]),
             gasLimit: 15_000_000,
             value: balance
         )

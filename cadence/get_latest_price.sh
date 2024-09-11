@@ -21,4 +21,4 @@ PUBLISH_TIME=$(echo "$PARSED_DATA" | jq -r '.publish_time')
 
 export PRICE_UPDATE_DATA PUBLISH_TIME
 
-flow-c1 transactions send ./transactions/get_eth_price_from_pythevm.cdc 0x0113fc39D6f9c549da38b150DfF3f6bB0AB678E1 $PRICE_UPDATE_DATA $1 $PUBLISH_TIME -f flow.json -n testnet --signer 'testnet-jp'
+flow-c1 transactions send ./transactions/get_eth_price_from_pythevm.cdc 0xAe5c731c4bC95d26baF6ac9078988b36C9b2CA96 $PRICE_UPDATE_DATA $1 $PUBLISH_TIME -f flow.json -n testnet --signer 'testnet-jp'

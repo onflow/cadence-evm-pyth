@@ -11,6 +11,12 @@ contract ExamplePythOracleForwarder {
         pyth = IPyth(_pyth);
     }
 
+    string public constant TEST = "1.0.0";
+
+    function getGreeting() public pure returns (string memory) {
+        return TEST;
+    }
+
     function fetchPrice(
         bytes[] calldata pythPriceUpdateData,
         bytes32 priceFeedId,
