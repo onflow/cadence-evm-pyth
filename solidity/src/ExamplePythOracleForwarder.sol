@@ -108,54 +108,6 @@ contract ExamplePythOracleForwarder {
         revert("Invalid hex character");
     }
 
-    /**
-    function compareBytes(bytes[] memory a, bytes[] memory b) public pure returns (bool) {
-        if (a.length != b.length) {
-            return false;
-        }
-
-        for (uint i = 0; i < a.length; i++) {
-            if (keccak256(a[i]) != keccak256(b[i])) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    function compareBytes32(bytes32 a, bytes32 b) public pure returns (bool) {
-        return a == b;
-    }**/
-    /**
-    function fetchPrice2(
-        bytes[] memory priceUpdateData,
-        bytes32 priceFeedId
-    ) public payable returns (uint256) {
-        string memory strPriceUpdateData = bytesToHexString(priceUpdateData);
-        string memory strPriceFeedId = bytes32ToHexString(priceFeedId);
-
-        // Convert string types from Cadence to native byte types
-        bytes[] memory priceUpdateDataConv = hexStringToBytes(strPriceUpdateData);
-        bytes32 priceFeedIdConv = hexStringToBytes32(strPriceFeedId);
-
-        require(compareBytes(priceUpdateData, priceUpdateDataConv));
-        require(compareBytes32(priceFeedId, priceFeedIdConv), "did not equal");
-
-    uint updateFee = pyth.getUpdateFee(priceUpdateDataConv);
-        pyth.updatePriceFeeds{value: updateFee}(priceUpdateDataConv);
-
-        // Fetch the latest price
-        PythStructs.Price memory price = pyth.getPriceNoOlderThan(
-            priceFeedIdConv,
-            60
-        );
-
-        uint tokenPriceToTokenExpoDecimals = (uint(uint64(price.price)) * (10 ** 18)) /
-            (10 ** uint8(uint32(-1 * price.expo)));
-
-        return tokenPriceToTokenExpoDecimals;
-    }**/
-
     function fetchPrice(
         string calldata pythPriceUpdateDataStr,
         string calldata priceFeedIdStr
