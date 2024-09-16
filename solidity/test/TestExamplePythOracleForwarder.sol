@@ -50,8 +50,8 @@ contract TestExamplePythOracleForwarder is Test {
 
         console2.log(updateData[0].length);
 
-        string memory pythPriceUpdateDataString = app.bytesToHexString(updateData);
-        string memory priceFeedIdString = app.bytes32ToHexString(validPriceFeedId);
+        string memory pythPriceUpdateDataString = app.bytesArrayToString(updateData);
+        string memory priceFeedIdString = app.bytes32ToString(validPriceFeedId);
 
         console2.log(pythPriceUpdateDataString);
         console2.log(bytes(priceFeedIdString).length);
