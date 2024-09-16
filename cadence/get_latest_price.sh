@@ -7,18 +7,16 @@ if [ $# -eq 0 ]; then
 fi
 
 # Fetch the latest price update
+# Fetch the latest price update
 RESPONSE=$(curl -s "https://hermes.pyth.network/v2/updates/price/latest?&ids[]=$1")
 
 # Use a single jq command to extract all required fields
 PARSED_DATA=$(echo "$RESPONSE" | jq -r '{
-    binary_data: .binary.data[0],
-    publish_time: .parsed[0].price.publish_time
+    binary_data: .binary.data[0]
 }')
 
 # Extract individual values
 PRICE_UPDATE_DATA=$(echo "$PARSED_DATA" | jq -r '.binary_data')
-PUBLISH_TIME=$(echo "$PARSED_DATA" | jq -r '.publish_time')
+echo $PRICE_UPDATE_DATA
 
-export PRICE_UPDATE_DATA PUBLISH_TIME
-
-flow-c1 transactions send ./transactions/get_eth_price_from_pythevm.cdc 0xAe5c731c4bC95d26baF6ac9078988b36C9b2CA96 $PRICE_UPDATE_DATA $1 $PUBLISH_TIME -f flow.json -n testnet --signer 'testnet-jp' --gas-limit 9999
+flow transactions send ./transactions/get_eth_price_from_pythevm.cdc 0x89Aa015184B2ddf53DFC797448D4b3F0a011E863 $PRICE_UPDATE_DATA $1 -f flow.json -n testnet --signer 'testnet-jp' --gas-limit 9999

@@ -1,6 +1,6 @@
 import "EVM"
 
-transaction(myPythCallingContractAddressHex: String, pythHermesUpdateDataPayload: String, tokenPriceFeedId: String, priceFeedPublishTime: UInt64) {
+transaction(myPythCallingContractAddressHex: String, pythHermesUpdateDataPayload: String, tokenPriceFeedId: String) {
 
     let evmAddress: EVM.EVMAddress
     let coa: auth(EVM.Call) &EVM.CadenceOwnedAccount
@@ -14,12 +14,10 @@ transaction(myPythCallingContractAddressHex: String, pythHermesUpdateDataPayload
 
     execute {
         let balance = EVM.Balance(attoflow: 0)
-        log(balance)
 
         let callResult = self.coa.call(
             to: self.evmAddress,
-            data: EVM.encodeABIWithSignature("getGreeting()", []),
-//            data: EVM.encodeABIWithSignature("fetchPrice(string,string,uint64)", [pythHermesUpdateDataPayload, tokenPriceFeedId, priceFeedPublishTime]),
+            data: EVM.encodeABIWithSignature("fetchPrice(string,string)", [pythHermesUpdateDataPayload, tokenPriceFeedId]),
             gasLimit: 15_000_000,
             value: balance
         )
@@ -27,6 +25,8 @@ transaction(myPythCallingContractAddressHex: String, pythHermesUpdateDataPayload
         assert(callResult.status == EVM.Status.successful, message: "Call failed")
 
         var res = EVM.decodeABI(types: [Type<UInt8>()], data: callResult.data)
-        log(res)
+
+        assert(res.length == 1, message: "Invalid response length")
+        log(res[0] as! UInt8)
     }
 }
