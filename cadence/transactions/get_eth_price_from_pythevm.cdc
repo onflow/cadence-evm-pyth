@@ -24,9 +24,9 @@ transaction(myPythCallingContractAddressHex: String, pythHermesUpdateDataPayload
 
         assert(callResult.status == EVM.Status.successful, message: "Call failed")
 
-        var res = EVM.decodeABI(types: [Type<UInt8>()], data: callResult.data)
+        var res = EVM.decodeABI(types: [Type<UInt256>()], data: callResult.data)
 
         assert(res.length == 1, message: "Invalid response length")
-        log(res[0] as! UInt8)
+        log(res[0] as! UInt256)
     }
 }
