@@ -19,4 +19,4 @@ PARSED_DATA=$(echo "$RESPONSE" | jq -r '{
 PRICE_UPDATE_DATA=$(echo "$PARSED_DATA" | jq -r '.binary_data')
 echo $PRICE_UPDATE_DATA
 
-flow transactions send ./transactions/get_eth_price_from_pythevm.cdc 0x89Aa015184B2ddf53DFC797448D4b3F0a011E863 $PRICE_UPDATE_DATA $1 -f flow.json -n testnet --signer 'testnet-jp' --gas-limit 9999
+flow transactions send ./transactions/get_eth_price_from_pythevm.cdc 0x9Ca38bd7184b23b2c8CD175eE00F3021636631EB $PRICE_UPDATE_DATA $1 -f flow.json -n testnet --signer 'testnet-jp' --gas-limit 9999
