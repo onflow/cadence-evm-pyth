@@ -98,6 +98,8 @@ contract ExamplePythOracleForwarder {
         revert("Invalid hex character");
     }
 
+    receive() external payable {}
+
     function fetchPrice(
         string calldata pythPriceUpdateDataStr,
         string calldata priceFeedIdStr
