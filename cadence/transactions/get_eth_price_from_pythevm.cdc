@@ -14,6 +14,8 @@ transaction(myPythCallingContractAddressHex: String, pythHermesUpdateDataPayload
 
     execute {
         let balance = EVM.Balance(attoflow: 0)
+        balance.setFLOW(flow: UFix64(10))
+
 
         let callResult = self.coa.call(
             to: self.evmAddress,
@@ -22,11 +24,15 @@ transaction(myPythCallingContractAddressHex: String, pythHermesUpdateDataPayload
             value: balance
         )
 
-        assert(callResult.status == EVM.Status.successful, message: "Call failed")
+        assert(
+            callResult.status == EVM.Status.failed || callResult.status == EVM.Status.successful,
+            message: "evm_error=".concat(callResult.errorMessage).concat("\n")
+        )
 
-        var res = EVM.decodeABI(types: [Type<UInt256>()], data: callResult.data)
+        let decoded = EVM.decodeABI(types: [Type<String>()], data: callResult.data)
+        assert(decoded.length == 1, message: "Expected decoded length of 1 but got ".concat(decoded.length.toString()))
+        let strData = decoded[0] as! String
 
-        assert(res.length == 1, message: "Invalid response length")
-        log(res[0] as! UInt256)
+        log(strData)
     }
 }
